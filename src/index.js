@@ -2,28 +2,49 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import "./index.css";
 
+const skills = [
+  {
+    skill: "HTML+CSS",
+    level: "advanced",
+    color: "#2662EA",
+  },
+  {
+    skill: "JavaScript",
+    level: "advanced",
+    color: "#EFD81D",
+  },
+  {
+    skill: "Web Design",
+    level: "advanced",
+    color: "#C3DCAF",
+  },
+  {
+    skill: "Git and GitHub",
+    level: "intermediate",
+    color: "#E84F33",
+  },
+  {
+    skill: "React",
+    level: "advanced",
+    color: "#60DAFB",
+  },
+  {
+    skill: "Svelte",
+    level: "beginner",
+    color: "#FF3B00",
+  },
+];
+
 function App() {
   return (
     <div className="card">
       <Avatar />
       <div className="data">
         <Intro />
-        {/* Should contain one Skill component
-        for each web dev skill that you have,
-        customized with props */}
-        <div className="skill-list">
-          <SkillList skill="HTML+CSS" color="blue" />
-
-          <SkillList skill="JavaScript" color="yellow" />
-
-          <SkillList skill="Web Design" color="green" />
-
-          <SkillList skill="Git and GitHub" color="red" />
-
-          <SkillList skill="React" color="skyblue" />
-
-          <SkillList skill="Svelte" color="red" />
-        </div>
+        <Skills />
+        {/*<div className="skill-list"></div>
+        
+        */}
       </div>
     </div>
   );
@@ -31,7 +52,7 @@ function App() {
   function Avatar() {
     const style = { width: "100%", height: "300px" };
 
-    return <img style={style} src="picture/IMG_0007.JPG" alt="portfolio" />;
+    return <img style={style} src="" alt="portfolio" />;
   }
 
   function Intro() {
@@ -46,10 +67,24 @@ function App() {
     );
   }
 
-  function SkillList(props) {
+  function Skills() {
+    const skillSet = skills;
+
     return (
-      <div className="skill" style={{ backgroundColor: props.color }}>
-        {props.skill}
+      <div className="skill-list">
+        {skillSet.map((skil) => (
+          <SkillList key={skil.skill} skillobj={skil} />
+        ))}
+      </div>
+    );
+  }
+
+  function SkillList({ skillobj }) {
+    return (
+      <div className="skill" style={{ backgroundColor: skillobj.color }}>
+        {skillobj.level === "beginner" && skillobj.skill + "👶"}
+        {skillobj.level === "intermediate" && skillobj.skill + "💪"}
+        {skillobj.level === "advanced" && skillobj.skill + "💪"}
       </div>
     );
   }
